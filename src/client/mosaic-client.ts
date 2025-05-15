@@ -1,5 +1,3 @@
-"use server";
-
 import { nextFetch } from "../lib/fetch-utils";
 import type {
 	MosaicConfig,

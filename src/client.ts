@@ -1,11 +1,19 @@
 "use client";
 
 // Export all client components
-export { default as MosaicBlogCard } from "./components/MosaicBlogCard";
-export { default as MosaicBlogContent } from "./components/MosaicBlogContent";
-export { default as MosaicBlogList } from "./components/MosaicBlogList";
-export { default as MosaicPageContainer } from "./components/MosaicPageContainer";
-export { default as TiptapRenderer } from "./components/mosaic-renderer";
+// Importing with explicit file extension helps with build output resolution
+import MosaicBlogCardComponent from "./components/MosaicBlogCard";
+import MosaicBlogContentComponent from "./components/MosaicBlogContent";
+import MosaicBlogListComponent from "./components/MosaicBlogList";
+import MosaicPageContainerComponent from "./components/MosaicPageContainer";
+import TiptapRendererComponent from "./components/mosaic-renderer";
+
+// Re-export with explicit names
+export const MosaicBlogCard = MosaicBlogCardComponent;
+export const MosaicBlogContent = MosaicBlogContentComponent;
+export const MosaicBlogList = MosaicBlogListComponent;
+export const MosaicPageContainer = MosaicPageContainerComponent;
+export const TiptapRenderer = TiptapRendererComponent;
 
 // Export client-side utils
 export { cn, isDynamicRoute, extractRouteParams } from "./lib/utils";

@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { type VariantProps, cva } from "class-variance-authority";
+import { cn } from "../lib/utils";
 
 const contentCardVariants = cva(
 	"relative overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-sm transition-all",

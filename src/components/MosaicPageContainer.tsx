@@ -1,8 +1,8 @@
 "use client";
 
-import { ContentCard } from "@/components/content-card";
-import { cn } from "@/lib/utils";
 import { type VariantProps, cva } from "class-variance-authority";
+import { cn } from "../lib/utils";
+import { ContentCard } from "./content-card";
 
 // Import the renderer directly since both are client components
 import TiptapRenderer from "./mosaic-renderer";

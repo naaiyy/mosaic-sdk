@@ -1,12 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/card";
-import { cn } from "@/lib/utils";
-import { CalendarBlank, Clock, Tag } from "@phosphor-icons/react/dist/ssr";
+import { CalendarBlank, Clock, Tag } from "@phosphor-icons/react";
 import { format } from "date-fns";
 import Link from "next/link";
+import { cn } from "../lib/utils";
+import { Card, CardContent, CardFooter, CardHeader } from "./card";
 
-import type { BlogPost } from "@/types/types";
+import type { BlogPost } from "../types/types";
 
 interface PostCardProps {
 	post: BlogPost;

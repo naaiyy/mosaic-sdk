@@ -10,6 +10,8 @@ export { MosaicClient } from "./client/mosaic-client";
 
 // Export types
 export * from "./types/types";
+export type { BlogPost, PublishDestination, PostLabel } from "./types/types";
+// Re-export these types explicitly to ensure they're available to consumers
 
 // Export utilities
 export * from "./lib/utils";

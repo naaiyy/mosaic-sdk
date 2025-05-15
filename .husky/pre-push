@@ -1,0 +1,21 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Script to check if package version exists on npm registry before pushing
+echo "Checking if package version already exists on npm registry..."
+
+# Get the current version from package.json
+VERSION=$(node -e "console.log(require('./package.json').version)")
+NAME=$(node -e "console.log(require('./package.json').name)")
+
+# Check if this version already exists on npm
+HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://registry.npmjs.org/$NAME/$VERSION")
+
+if [ "$HTTP_STATUS" -eq "200" ]; then
+  echo "Error: Version $VERSION of $NAME already exists on npm registry!"
+  echo "Please run 'pnpm version patch' (or minor/major) to bump the version before pushing."
+  exit 1
+else
+  echo "Version check passed: $VERSION is not published yet."
+  exit 0
+fi

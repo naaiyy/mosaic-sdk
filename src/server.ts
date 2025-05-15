@@ -1,12 +1,12 @@
 "use server";
 
-import { MosaicClient } from "./client/mosaic-client";
-import { createMosaicConfig } from "./config/configuration";
+import { MosaicClient } from "./client/mosaic-client.js";
+import { createMosaicConfig } from "./config/configuration.js";
 import type {
 	MosaicConfig,
 	MosaicPostResponse,
 	MosaicPostsResponse,
-} from "./types/types";
+} from "./types/types.js";
 
 /**
  * Type definitions for Next.js fetch with cache/revalidation options

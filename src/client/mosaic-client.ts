@@ -1,9 +1,9 @@
-import { nextFetch } from "../lib/fetch-utils";
+import { nextFetch } from "../lib/fetch-utils.js";
 import type {
 	MosaicConfig,
 	MosaicPostResponse,
 	MosaicPostsResponse,
-} from "../types/types";
+} from "../types/types.js";
 
 /**
  * Mosaic API Client

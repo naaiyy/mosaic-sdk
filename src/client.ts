@@ -1,12 +1,12 @@
 "use client";
 
 // Export all client components
-// Importing with explicit file extension helps with build output resolution
-import MosaicBlogCardComponent from "./components/MosaicBlogCard";
-import MosaicBlogContentComponent from "./components/MosaicBlogContent";
-import MosaicBlogListComponent from "./components/MosaicBlogList";
-import MosaicPageContainerComponent from "./components/MosaicPageContainer";
-import TiptapRendererComponent from "./components/mosaic-renderer";
+// Use explicit file extensions for better path resolution in build output
+import MosaicBlogCardComponent from "./components/MosaicBlogCard.js";
+import MosaicBlogContentComponent from "./components/MosaicBlogContent.js";
+import MosaicBlogListComponent from "./components/MosaicBlogList.js";
+import MosaicPageContainerComponent from "./components/MosaicPageContainer.js";
+import TiptapRendererComponent from "./components/mosaic-renderer.js";
 
 // Re-export with explicit names
 export const MosaicBlogCard = MosaicBlogCardComponent;
@@ -16,12 +16,12 @@ export const MosaicPageContainer = MosaicPageContainerComponent;
 export const TiptapRenderer = TiptapRendererComponent;
 
 // Export client-side utils
-export { cn, isDynamicRoute, extractRouteParams } from "./lib/utils";
+export { cn, isDynamicRoute, extractRouteParams } from "./lib/utils.js";
 
 // Client-side configuration
-import { MosaicClient } from "./client/mosaic-client";
-import { createMosaicConfig } from "./config/configuration";
-import type { MosaicConfig, MosaicRoute } from "./types/types";
+import { MosaicClient } from "./client/mosaic-client.js";
+import { createMosaicConfig } from "./config/configuration.js";
+import type { MosaicConfig, MosaicRoute } from "./types/types.js";
 
 // Client-side singleton (only works in client components)
 let clientInstance: MosaicClient | null = null;

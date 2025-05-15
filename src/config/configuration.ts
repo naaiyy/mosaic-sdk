@@ -1,4 +1,4 @@
-import type { MosaicConfig } from "../types/types";
+import type { MosaicConfig } from "../types/types.js";
 
 /**
  * Create a standardized Mosaic configuration object

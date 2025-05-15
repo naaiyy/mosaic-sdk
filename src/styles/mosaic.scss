@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+/* Import TipTap variables */
+@import "./styles/_variables.scss";
+
+body {
+  --tt-toolbar-height: 44px;
+  --tt-theme-text: var(--tt-gray-light-900);
+
+  .dark & {
+    --tt-theme-text: var(--tt-gray-dark-900);
+  }
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  color: var(--tt-theme-text);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  padding: 0;
+}
+
+html,
+body,
+#root,
+#app {
+  height: 100%;
+  background-color: var(--tt-bg-color);
+}
+
+/* Removed overflow hidden from body to allow natural page scrolling */
+body {
+  overflow: visible;
+}
+
+.tiptap.ProseMirror {
+  font-family: "DM Sans", sans-serif;
+}
+
+.content-wrapper {
+  height: 100%;
+  /* Remove overflow-y: auto to prevent nested scrolling */
+
+  /* Keep scrollbar styling for when parent handles scrolling */
+  &::-webkit-scrollbar {
+    display: block;
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--tt-scrollbar-color);
+    border-radius: 4px;
+  }
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--tt-scrollbar-color) transparent;
+}
+
+.editor-content {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  transition: max-width 0.2s ease-in-out;
+  overflow-x: hidden;
+}
+
+.editor-content-fullwidth {
+  max-width: 95%;
+}
+
+.editor-content .tiptap.ProseMirror {
+  padding: 3rem 3rem;
+
+  /* Essential selection styling */
+  ::selection {
+    background-color: var(--tt-selection-color);
+  }
+
+  /* Placeholder styling */
+  p.is-editor-empty:first-child::before {
+    color: var(--tt-gray-light-400);
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  /* Dark mode placeholder */
+  .dark & {
+    p.is-editor-empty:first-child::before {
+      color: var(--tt-gray-dark-400);
+    }
+  }
+
+  /* Task list styling */
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.5em;
+
+      >label {
+        margin-right: 0.5em;
+        user-select: none;
+      }
+
+      >div {
+        flex: 1;
+        margin-top: 0.1em;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
+    }
+  }
+
+  /* Ensure blockquote styling is applied */
+  blockquote {
+    position: relative;
+    padding-left: 1em;
+    padding-top: 0.375em;
+    padding-bottom: 0.375em;
+    margin: 1.5rem 0;
+
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0.25em;
+      background-color: var(--blockquote-bg-color, var(--tt-gray-light-900));
+      content: "";
+      border-radius: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .editor-content .tiptap.ProseMirror {
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Image resize styling */
+.tiptap.ProseMirror {
+
+  /* Style for resizable images */
+  .tiptap-image {
+    &.ProseMirror-selectednode {
+      outline: 3px solid #68cef8;
+    }
+  }
+
+  /* Custom resize handles */
+  .resize-trigger {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    border: 2px solid #68cef8;
+    border-radius: 50%;
+
+    &.resize-trigger-br {
+      bottom: -5px;
+      right: -5px;
+      cursor: nwse-resize;
+    }
+
+    &.resize-trigger-bl {
+      bottom: -5px;
+      left: -5px;
+      cursor: nesw-resize;
+    }
+
+    &.resize-trigger-tr {
+      top: -5px;
+      right: -5px;
+      cursor: nesw-resize;
+    }
+
+    &.resize-trigger-tl {
+      top: -5px;
+      left: -5px;
+      cursor: nwse-resize;
+    }
+  }
+
+  /* Dark mode adjustments */
+  .dark & {
+    .resize-trigger {
+      background: #2d3748;
+      border-color: #4facfe;
+    }
+  }
+}

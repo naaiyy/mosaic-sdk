@@ -1,6 +1,8 @@
+"use client";
+
 import PostCard from "@/components/MosaicBlogCard";
-import { Files } from "@/components/icons-client";
 import type { BlogPost } from "@/types/types";
+import { Files } from "@phosphor-icons/react/dist/ssr";
 
 interface PostListProps {
 	posts: BlogPost[] | undefined;

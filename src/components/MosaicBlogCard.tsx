@@ -1,8 +1,8 @@
 "use client";
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/card";
-import { CalendarBlank, Clock, Tag } from "@/components/icons-client";
 import { cn } from "@/lib/utils";
+import { CalendarBlank, Clock, Tag } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
 import Link from "next/link";
 

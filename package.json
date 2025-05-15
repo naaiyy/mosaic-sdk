@@ -1,6 +1,6 @@
 {
 	"name": "@pastapp/mosaic",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "SDK for integrating with PAST Mosaic CMS",
 	"main": "dist/index.js",
 	"module": "dist/index.js",
@@ -25,7 +25,7 @@
 	},
 	"scripts": {
 		"build": "pnpm clean && pnpm build:js && pnpm build:styles",
-		"build:js": "tsc --project tsconfig.build.json",
+		"build:js": "tsc --project tsconfig.build.json --outDir dist --declaration --emitDeclarationOnly false --noEmit false",
 		"build:styles": "pnpm copy-styles",
 		"clean": "rm -rf dist",
 		"dev": "tsc --project tsconfig.build.json --watch",

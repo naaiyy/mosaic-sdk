@@ -9,4 +9,4 @@ export * from "./types/types";
 export type { BlogPost, PublishDestination, PostLabel } from "./types/types";
 
 // Export configuration helpers
-export * from "./config/configuration";
+export { createMosaicConfig } from "./config/configuration";

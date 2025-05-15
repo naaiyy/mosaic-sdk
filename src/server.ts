@@ -1,6 +1,7 @@
 "use server";
 
 import { MosaicClient } from "./client/mosaic-client";
+import { createMosaicConfig } from "./config/configuration";
 import type {
 	MosaicConfig,
 	MosaicPostResponse,
@@ -32,7 +33,7 @@ export async function nextFetch(
  * Get a list of blog posts
  */
 export async function getPosts(
-	config: MosaicConfig,
+	config: Partial<MosaicConfig>,
 	options: {
 		path?: string;
 		page?: number;
@@ -40,7 +41,8 @@ export async function getPosts(
 		category?: string;
 	} = {},
 ): Promise<MosaicPostsResponse> {
-	const client = new MosaicClient(config);
+	const fullConfig = createMosaicConfig(config);
+	const client = new MosaicClient(fullConfig);
 	return client.getPosts(options);
 }
 
@@ -48,10 +50,11 @@ export async function getPosts(
  * Get a single blog post by slug
  */
 export async function getPost(
-	config: MosaicConfig,
+	config: Partial<MosaicConfig>,
 	slug: string,
 ): Promise<MosaicPostResponse> {
-	const client = new MosaicClient(config);
+	const fullConfig = createMosaicConfig(config);
+	const client = new MosaicClient(fullConfig);
 	return client.getPost(slug);
 }
 
@@ -60,13 +63,14 @@ export async function getPost(
  * Used for auto-discovery of destinations
  */
 export async function registerDestination(
-	config: MosaicConfig,
+	config: Partial<MosaicConfig>,
 	options: {
 		path: string;
 		type?: "list" | "post" | "category";
 		name?: string;
 	},
 ): Promise<{ success: boolean; message?: string }> {
-	const client = new MosaicClient(config);
+	const fullConfig = createMosaicConfig(config);
+	const client = new MosaicClient(fullConfig);
 	return client.registerDestination(options);
 }

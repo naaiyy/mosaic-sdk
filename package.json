@@ -1,6 +1,6 @@
 {
 	"name": "@pastapp/mosaic",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"description": "SDK for integrating with PAST Mosaic CMS",
 	"main": "dist/index.js",
 	"module": "dist/index.js",

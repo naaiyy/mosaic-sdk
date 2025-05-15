@@ -2,6 +2,9 @@ node_modules
 dist
 .DS_Store
 
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
 # Documentation and development notes
 docs/
 docs/plan.todo

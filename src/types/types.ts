@@ -2,7 +2,7 @@
  * Core types for the Mosaic SDK
  */
 
-// API response types
+// API response types - Used for API communication
 export interface MosaicPost {
 	id: number;
 	title: string;
@@ -30,6 +30,70 @@ export interface MosaicPostsResponse {
 
 export interface MosaicPostResponse {
 	post: MosaicPost;
+}
+
+/**
+ * Types for structured data that will be serialized to JSON strings
+ */
+
+// Type for post labels
+export type PostLabel = string;
+
+// Type for publish destinations
+export interface PublishDestination {
+	id: string | number;
+	name: string;
+	type: string;
+	status?: string;
+}
+
+/**
+ * UI-ready blog post type used by the components
+ * This is derived from MosaicPost but with fields optimized for UI rendering
+ */
+export interface BlogPost {
+	id: number;
+	title: string;
+	slug: string;
+	content: string;
+	excerpt?: string | null;
+	featuredImage?: string | null;
+	status: string;
+
+	/**
+	 * JSON string of labels
+	 * @example JSON.parse(labels) => PostLabel[]
+	 */
+	labels?: string | null;
+
+	/**
+	 * Parsed labels (use this when available instead of parsing the JSON string)
+	 * Will be null when labels is null, undefined when not yet parsed
+	 */
+	parsedLabels?: PostLabel[] | null;
+
+	seoTitle?: string | null;
+	seoDescription?: string | null;
+
+	/**
+	 * JSON string of publish destinations
+	 * @example JSON.parse(publishDestinations) => PublishDestination[]
+	 * @deprecated Use parsedDestinations instead - this will be made optional in a future version
+	 */
+	publishDestinations: string;
+
+	/**
+	 * Parsed publish destinations
+	 * This field should always be populated when the object is created
+	 * at the data boundary by parsing publishDestinations
+	 */
+	parsedDestinations: PublishDestination[];
+
+	projectId: number;
+	authorId: string;
+	publishedAt?: Date | null;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 // Configuration types

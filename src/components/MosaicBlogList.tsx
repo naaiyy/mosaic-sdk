@@ -1,25 +1,6 @@
-import { Files } from "@phosphor-icons/react/dist/ssr";
-import PostCard from "~/components/MosaicBlogCard";
-
-// Define proper type for blog posts based on the schema
-export interface BlogPost {
-	id: number;
-	title: string;
-	slug: string;
-	content: string;
-	excerpt?: string | null;
-	featuredImage?: string | null;
-	status: string;
-	labels?: string | null; // JSON string of labels
-	seoTitle?: string | null;
-	seoDescription?: string | null;
-	publishDestinations: string; // JSON string of destinations
-	projectId: number;
-	authorId: string;
-	publishedAt?: Date | null;
-	createdAt: Date;
-	updatedAt: Date;
-}
+import PostCard from "@/components/MosaicBlogCard";
+import { Files } from "@/components/icons-client";
+import type { BlogPost } from "@/types/types";
 
 interface PostListProps {
 	posts: BlogPost[] | undefined;

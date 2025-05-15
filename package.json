@@ -1,11 +1,13 @@
 {
 	"name": "@pastapp/mosaic",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "SDK for integrating with PAST Mosaic CMS",
 	"main": "dist/index.js",
 	"module": "dist/index.mjs",
 	"types": "dist/index.d.ts",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup && pnpm copy-styles",
 		"dev": "tsup --watch",

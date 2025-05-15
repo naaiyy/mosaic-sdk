@@ -55,7 +55,7 @@ importers:
         version: 4.1.0
       next:
         specifier: ^14.0.0
-        version: 14.2.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 14.2.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.88.0)
       react:
         specifier: ^18.0.0
         version: 18.3.1
@@ -2640,7 +2640,7 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  next@14.2.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@14.2.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.88.0):
     dependencies:
       '@next/env': 14.2.28
       '@swc/helpers': 0.5.5
@@ -2661,6 +2661,7 @@ snapshots:
       '@next/swc-win32-arm64-msvc': 14.2.28
       '@next/swc-win32-ia32-msvc': 14.2.28
       '@next/swc-win32-x64-msvc': 14.2.28
+      sass: 1.88.0
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros

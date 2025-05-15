@@ -1,4 +1,24 @@
-import { MosaicPageContainer, configureMosaic } from "@pastapp/mosaic";
+import { configureMosaic } from "~/config/configuration";
+import { MosaicPageContainer } from "~/index";
+
+// Use this type to match what the MosaicPageContainer expects
+type TiptapContent = {
+	type: string;
+	content?: Array<{
+		type: string;
+		content?: Array<{
+			type: string;
+			text?: string;
+			[key: string]: unknown;
+		}>;
+		[key: string]: unknown;
+	}>;
+	meta?: {
+		isFullWidth?: boolean;
+		[key: string]: unknown;
+	};
+	[key: string]: unknown;
+};
 import { CalendarBlank, Clock } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
 import { notFound } from "next/navigation";
@@ -49,7 +69,13 @@ export default async function BlogPostPage({
 	}
 
 	// Calculate estimated read time (roughly 200 words per minute)
-	const wordCount = post.content.length / 5; // Very rough estimate
+	// Convert to string to safely calculate length if content is an object
+	const contentString =
+		typeof post.content === "string"
+			? post.content
+			: JSON.stringify(post.content);
+	// Split by whitespace and filter out empty strings for a better word count
+	const wordCount = contentString.split(/\s+/).filter(Boolean).length;
 	const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
 	return (
@@ -89,8 +115,12 @@ export default async function BlogPostPage({
 
 			{/* Post Content */}
 			<MosaicPageContainer
-				content={post.content}
-				size="md"
+				content={
+					typeof post.content === "string"
+						? post.content
+						: (post.content as TiptapContent)
+				}
+				size="lg"
 				spacing="relaxed"
 				cardVariant="default"
 			/>

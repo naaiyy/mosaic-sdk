@@ -1,0 +1,32 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"suspicious": {
+				"noExplicitAny": "error"
+			},
+			"correctness": {
+				"noUnusedVariables": "error"
+			},
+			"style": {
+				"useConsistentArrayType": "error",
+				"useImportType": "error"
+			}
+		},
+		"ignore": [
+			"dist/**",
+			"node_modules/**",
+			"examples/next-app/app/blog/[slug]/page.tsx",
+			"examples/next-app/app/blog/page.tsx"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	}
+}

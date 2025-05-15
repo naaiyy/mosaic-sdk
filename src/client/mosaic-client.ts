@@ -7,11 +7,6 @@ import type {
 	MosaicPostsResponse,
 } from "../types/types";
 
-// NextJS fetch options type extension
-type NextFetchRequestConfig = RequestInit & {
-	next?: { revalidate?: number };
-};
-
 /**
  * Mosaic API Client
  * Handles communication with the PAST Mosaic CMS API

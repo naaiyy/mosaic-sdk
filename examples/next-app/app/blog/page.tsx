@@ -1,6 +1,42 @@
-import { MosaicBlogList, configureMosaic } from "@pastapp/mosaic";
 import { ArrowClockwise } from "@phosphor-icons/react/dist/ssr";
 import { Suspense } from "react";
+import type { BlogPost } from "~/components/MosaicBlogList";
+import { MosaicBlogList, configureMosaic } from "~/index";
+import type { MosaicPost } from "~/types/types";
+
+// Adapter function to convert MosaicPost to BlogPost format
+function adaptPostsToMosaicFormat(posts: MosaicPost[]): BlogPost[] {
+	return posts.map((post) => {
+		// Create a properly typed BlogPost object
+		const blogPost: BlogPost = {
+			id: post.id,
+			title: post.title,
+			slug: post.slug,
+			// Convert content object to string
+			content:
+				typeof post.content === "string"
+					? post.content
+					: JSON.stringify(post.content),
+			excerpt: post.excerpt || null,
+			featuredImage: post.featuredImage || null,
+			status: post.status,
+			// Convert labels array to string
+			labels: Array.isArray(post.labels) ? JSON.stringify(post.labels) : null,
+			seoTitle: post.seoTitle || null,
+			seoDescription: post.seoDescription || null,
+			// Required fields that might not be in MosaicPost
+			publishDestinations: "",
+			projectId: 0,
+			authorId: post.authorId,
+			// Convert publishedAt string to Date or null
+			publishedAt: post.publishedAt ? new Date(post.publishedAt) : null,
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		};
+
+		return blogPost;
+	});
+}
 
 // Configure the Mosaic SDK
 const mosaicConfig = configureMosaic({
@@ -69,12 +105,15 @@ async function BlogPostsList({ page }: { page: number }) {
 
 	return (
 		<div className="space-y-8">
-			<MosaicBlogList posts={posts} />
+			<MosaicBlogList posts={adaptPostsToMosaicFormat(posts)} />
 
 			{/* Pagination UI */}
-			{pagination && pagination.totalPages > 1 && (
+			{pagination?.hasMore && (
 				<div className="flex justify-center gap-2 mt-8">
-					{Array.from({ length: pagination.totalPages }).map((_, i) => {
+					{/* Calculate total pages based on total items and limit */}
+					{Array.from({
+						length: Math.ceil(pagination.totalItems / (pagination.limit || 12)),
+					}).map((_, i) => {
 						const pageNumber = i + 1;
 						return (
 							<a

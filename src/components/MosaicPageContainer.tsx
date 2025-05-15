@@ -3,12 +3,9 @@
 import { ContentCard } from "@/components/content-card";
 import { cn } from "@/lib/utils";
 import { type VariantProps, cva } from "class-variance-authority";
-import dynamic from "next/dynamic";
 
-// Dynamically import the Tiptap renderer to avoid SSR issues
-const TiptapRenderer = dynamic(() => import("./mosaic-renderer"), {
-	ssr: false,
-});
+// Import the renderer directly since both are client components
+import TiptapRenderer from "./mosaic-renderer";
 
 // Import type from tiptap-renderer or create a type reference
 type TiptapContent = {

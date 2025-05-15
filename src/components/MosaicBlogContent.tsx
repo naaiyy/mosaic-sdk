@@ -1,7 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
 /**
  * MosaicBlogContent Component
  *
@@ -19,10 +17,8 @@ import dynamic from "next/dynamic";
  * ```
  */
 
-// Dynamically import the Tiptap renderer to avoid SSR issues
-const TiptapRenderer = dynamic(() => import("./mosaic-renderer"), {
-	ssr: false,
-});
+// Import the renderer directly since both are client components
+import TiptapRenderer from "./mosaic-renderer";
 
 // Import type from tiptap-renderer or create a type reference
 type TiptapContent = {

@@ -56,8 +56,9 @@ export class MosaicClient {
 				queryParams.append("domain", this.siteDomain);
 			}
 
-			// Make the request
-			const url = `${this.baseUrl}/blog?${queryParams.toString()}`;
+			// Make the request - avoid appending /blog if it's already in the baseUrl
+			const endpoint = this.baseUrl.endsWith("/blog") ? "" : "/blog";
+			const url = `${this.baseUrl}${endpoint}?${queryParams.toString()}`;
 			const headers: HeadersInit = {
 				"Content-Type": "application/json",
 			};
@@ -95,7 +96,9 @@ export class MosaicClient {
 	 */
 	async getPost(slug: string): Promise<MosaicPostResponse> {
 		try {
-			const url = `${this.baseUrl}/blog/${slug}`;
+			// Avoid appending /blog if it's already in the baseUrl
+			const endpoint = this.baseUrl.endsWith("/blog") ? "" : "/blog";
+			const url = `${this.baseUrl}${endpoint}/${slug}`;
 			const headers: HeadersInit = {
 				"Content-Type": "application/json",
 			};

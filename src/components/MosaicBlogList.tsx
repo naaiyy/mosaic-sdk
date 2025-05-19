@@ -1,15 +1,19 @@
 "use client";
 
 import { Files } from "@phosphor-icons/react";
-import type { BlogPost } from "../types/types";
+import type { BlogPost, MosaicConfig } from "../types/types";
 import PostCard from "./MosaicBlogCard";
 
 interface PostListProps {
 	posts: BlogPost[] | undefined;
 	error?: string;
+	/**
+	 * Optional Mosaic configuration for custom URL generation
+	 */
+	config?: MosaicConfig;
 }
 
-export default function PostList({ posts, error }: PostListProps) {
+export default function PostList({ posts, error, config }: PostListProps) {
 	if (error) {
 		return (
 			<div className="flex h-96 w-full items-center justify-center">
@@ -32,7 +36,7 @@ export default function PostList({ posts, error }: PostListProps) {
 	return (
 		<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{posts.map((post) => (
-				<PostCard key={post.id} post={post} />
+				<PostCard key={post.id} post={post} config={config} />
 			))}
 		</div>
 	);

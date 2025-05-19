@@ -17,6 +17,13 @@ export const TiptapRenderer = TiptapRendererComponent;
 
 // Export client-side utils
 export { cn, isDynamicRoute, extractRouteParams } from "./lib/utils.js";
+export {
+	getRouteUrl,
+	getBlogPostUrl,
+	getBlogListUrl,
+	getBlogCategoryUrl,
+	DEFAULT_ROUTES,
+} from "./lib/url-utils.js";
 
 // Client-side configuration
 import { MosaicClient } from "./client/mosaic-client.js";

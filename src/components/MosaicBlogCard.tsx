@@ -6,16 +6,35 @@ import Link from "next/link";
 import { cn } from "../lib/utils";
 import { Card, CardContent, CardFooter, CardHeader } from "./card";
 
-import type { BlogPost } from "../types/types";
+import { DEFAULT_ROUTES, getBlogPostUrl } from "../lib/url-utils.js";
+import type { BlogPost, MosaicConfig } from "../types/types";
 
 interface PostCardProps {
 	post: BlogPost;
 	className?: string;
+	/**
+	 * Optional Mosaic configuration for custom URL generation
+	 * If not provided, will use the default URL pattern
+	 */
+	config?: MosaicConfig;
 }
 
-export default function PostCard({ post, className }: PostCardProps) {
+export default function PostCard({ post, className, config }: PostCardProps) {
 	// Parse labels from JSON string
 	const labels = post.labels ? JSON.parse(post.labels as string) : [];
+
+	// Generate the post URL - if config is provided, use the configured pattern
+	// otherwise fall back to the default pattern or the legacy pattern
+	let postUrl = `/blog/${post.slug}`; // Default fallback URL
+
+	if (config) {
+		// Use the new URL utility with the provided config
+		postUrl = getBlogPostUrl(config, post.slug);
+	} else {
+		// For backward compatibility with existing implementations
+		// This matches the previously hardcoded path format
+		postUrl = `/blog/post/${post.slug}`;
+	}
 
 	return (
 		<Card
@@ -24,7 +43,7 @@ export default function PostCard({ post, className }: PostCardProps) {
 				className,
 			)}
 		>
-			<Link href={`/blog/post/${post.slug}`} className="group block h-full">
+			<Link href={postUrl} className="group block h-full">
 				{post.featuredImage && (
 					<div className="aspect-video w-full overflow-hidden">
 						<img
